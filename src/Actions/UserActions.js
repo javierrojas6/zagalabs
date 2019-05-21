@@ -25,7 +25,7 @@ export const logIn = userData => async dispatch => {
 
 export const logOut = userData => async dispatch => {
   try {
-     await User.logOut(userData);
+    await User.logOut(userData);
 
     dispatch({ type: ACTIONS.logOut });
     return null;

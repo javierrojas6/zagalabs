@@ -11,9 +11,10 @@ import classNames from "classnames";
 
 import MainContent from "./MainContent";
 import MainMenu from "./MainMenu";
+import ItemsGallery from "./ItemsGallery";
 
 import "./App.sass";
-import styles from "./App.theme"
+import styles from "./App.theme";
 
 class App extends Component {
   state = {
@@ -84,7 +85,7 @@ class App extends Component {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <MainContent content={<div>hola</div>} />
+          <MainContent content={<ItemsGallery />} />
         </main>
       </div>
     );

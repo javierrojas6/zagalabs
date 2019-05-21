@@ -1,7 +1,7 @@
 import { Item } from '../Entity/Item';
 
 export const Product = {
-  getProduct: () => {
+  getProducts: () => {
     const producList = [];
 
     for (var i = 1; i < 30; i++) {

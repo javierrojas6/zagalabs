@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import _ from "lodash";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 
+import { getProducts } from "../../Actions/ProductActions";
+
 import { Item } from "../../Entity/Item";
-import { Item as ItemComponent } from "../Item";
+import ItemComponent from "../ItemComponent";
 
 import "./styles.sass";
 import styles from "./theme";
@@ -17,7 +20,7 @@ class ItemsGallery extends Component {
   };
 
   componentDidMount = () => {
-    this.props.getProducts();
+    this.props.getProducts(null);
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -36,14 +39,15 @@ class ItemsGallery extends Component {
     return (
       <div className={`items-gallery ${classes.root}`}>
         <Grid container spacing={24}>
-          <Paper className={classes.paper}>
-            {processedProducts.map(productsRow => (
-              <Grid xs={12}>
-                {productsRow.map(item => (
-                  <ItemComponent item />
-                ))}
-              </Grid>
-            ))}
+          <Paper>
+            {processedProducts &&
+              processedProducts.map(productsRow => (
+                <Grid xs={12}>
+                  {productsRow.map(item => (
+                    <ItemComponent item={item} />
+                  ))}
+                </Grid>
+              ))}
           </Paper>
         </Grid>
       </div>
@@ -57,11 +61,13 @@ ItemsGallery.propTypes = {
 };
 
 const mS = store => ({
-  products: store.productsReducer.products
+  products: store.ProductReducer.products
 });
 
 const mD = {
   getProducts
 };
 
-export default withStyles(styles)(connect(mS, mD)(ItemsGallery);
+export default withStyles(styles)(
+  connect(mS,mD)(ItemsGallery)
+);

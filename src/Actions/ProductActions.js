@@ -6,13 +6,8 @@ export const ACTIONS = {
 
 export const getProducts = category => async dispatch => {
   try {
-    const response = await Product.getProducts(category);
-
-    if (response.status === 200) {
-      const { data } = response;
-
-      dispatch({ type: ACTIONS.GET_PRODUCTS, payload: data });
-    }
+    const response = Product.getProducts(category);
+    dispatch({ type: ACTIONS.GET_PRODUCTS, payload: response });
     return response;
   } catch (error) {
     return error;
