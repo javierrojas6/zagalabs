@@ -16,6 +16,10 @@ class ItemsGallery extends Component {
     procesedProducts: null
   };
 
+  componentDidMount = () => {
+    this.props.getProducts();
+  };
+
   componentDidUpdate = (prevProps, prevState) => {
     const { products } = this.props;
 
@@ -56,6 +60,8 @@ const mS = store => ({
   products: store.productsReducer.products
 });
 
-const mD = {};
+const mD = {
+  getProducts
+};
 
-export default withStyles(styles)(ItemsGallery);
+export default withStyles(styles)(connect(mS, mD)(ItemsGallery);
