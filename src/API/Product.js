@@ -10,7 +10,7 @@ export const Product = {
       p.name = `name: ${i}`;
       p.summary = `Lorem ipsum dolor sit amet, consectetur adipiscing elit: ${i}`;
       p.category = `category: ${i}`;
-      p.image = 'https://loremflickr.com/640/480/groceries';
+      p.image = 'https://loremflickr.com/160/160/groceries';
       p.price = ((Math.random() + 1) * 30).toFixed(2);
 
       producList.push(p);

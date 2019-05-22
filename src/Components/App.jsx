@@ -11,7 +11,7 @@ import classNames from "classnames";
 
 import MainContent from "./MainContent";
 import MainMenu from "./MainMenu";
-import ItemsGallery from "./ItemsGallery";
+import Gallery from "./Gallery";
 
 import "./App.sass";
 import styles from "./App.theme";
@@ -85,7 +85,7 @@ class App extends Component {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <MainContent content={<ItemsGallery />} />
+          <MainContent content={<Gallery />} />
         </main>
       </div>
     );

@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import {withStyles} from '@material-ui/core/styles';
-import {Grid, Paper} from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
+import { Grid, Paper } from "@material-ui/core";
 
-import './styles.sass';
-import styles from './theme';
+import "./styles.sass";
+import styles from "./theme";
 
 class MainContent extends Component {
   render() {
-    const {classes, content} = this.props;
+    const { classes, content } = this.props;
 
     return (
       <div className={`main-container ${classes.root}`}>
@@ -25,7 +25,7 @@ class MainContent extends Component {
 
 MainContent.propTypes = {
   classes: PropTypes.object.isRequired,
-  content: PropTypes.object,
+  content: PropTypes.object
 };
 
 export default withStyles(styles)(MainContent);
