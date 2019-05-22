@@ -28,7 +28,7 @@ export const removeProduct = product => async dispatch => {
   try {
     ShoppingCart.removeProduct(product);
 
-    dispatch({ type: ACTIONS.REMOVE_PRODUCT,  payload: { product } });
+    dispatch({ type: ACTIONS.REMOVE_PRODUCT, payload: { product } });
     return { product };
   } catch (error) {
     return error;
@@ -37,7 +37,7 @@ export const removeProduct = product => async dispatch => {
 
 export const clean = () => async dispatch => {
   try {
-   await ShoppingCart.clean();
+    await ShoppingCart.clean();
 
     dispatch({ type: ACTIONS.CLEAN });
     return response;
