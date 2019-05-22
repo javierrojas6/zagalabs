@@ -3,27 +3,30 @@ import { ShoppingCart } from '../API/ShoppingCart';
 export const ACTIONS = {
   ADD_PRODUCT: 'shopping_cart/add_product',
   REMOVE_PRODUCT: 'shopping_cart/add_product',
-  GET_CURRENT: 'shopping_cart/get_current',
   CLEAN: 'shopping_cart/clear',
   CHECKOUT: 'shopping_cart/checkout',
 };
 
+export const STATES = {
+  BUYING: 'buying',
+  VALIDATING: 'validating',
+  CHECKOUT: 'checkout'
+};
+
 export const addProduct = (product, qty) => async dispatch => {
   try {
-    const response = await ShoppingCart.addProduct(product);
+    ShoppingCart.addProduct(product);
 
-    if (response.status === 200) {
-      dispatch({ type: ACTIONS.LOG_IN, payload: { product, qty } });
-    }
-    return response;
+    dispatch({ type: ACTIONS.ADD_PRODUCT, payload: { product, qty } });
+    return  { product, qty } ;
   } catch (error) {
     return error;
   }
 };
 
-export const removeProduct = (product, qty) => async dispatch => {
+export const removeProduct = product => async dispatch => {
   try {
-    const response = await ShoppingCart.addProduct(product, qty);
+    const response = await ShoppingCart.addProduct(product);
 
     dispatch({ type: ACTIONS.REMOVE_PRODUCT });
     return response;

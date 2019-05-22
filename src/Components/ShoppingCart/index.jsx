@@ -12,7 +12,7 @@ import { Item } from "../../Entity/Item";
 import "./styles.sass";
 import styles from "./theme";
 
-class Gallery extends Component {
+class ShoppingCart extends Component {
   state = {
     title:'Products - All'
   };
@@ -40,7 +40,7 @@ class Gallery extends Component {
   }
 }
 
-Gallery.propTypes = {
+ShoppingCart.propTypes = {
   items: PropTypes.arrayOf(Item),
   classes: PropTypes.object.isRequired
 };
@@ -57,5 +57,5 @@ export default withStyles(styles)(
   connect(
     mS,
     mD
-  )(Gallery)
+  )(ShoppingCart)
 );
