@@ -18,7 +18,7 @@ export const addProduct = (product, qty) => async dispatch => {
     ShoppingCart.addProduct(product);
 
     dispatch({ type: ACTIONS.ADD_PRODUCT, payload: { product, qty } });
-    return  { product, qty } ;
+    return { product, qty };
   } catch (error) {
     return error;
   }
@@ -26,10 +26,10 @@ export const addProduct = (product, qty) => async dispatch => {
 
 export const removeProduct = product => async dispatch => {
   try {
-    const response = await ShoppingCart.addProduct(product);
+    ShoppingCart.removeProduct(product);
 
-    dispatch({ type: ACTIONS.REMOVE_PRODUCT });
-    return response;
+    dispatch({ type: ACTIONS.REMOVE_PRODUCT,  payload: { product } });
+    return { product };
   } catch (error) {
     return error;
   }
@@ -37,7 +37,7 @@ export const removeProduct = product => async dispatch => {
 
 export const clean = () => async dispatch => {
   try {
-    const response = await ShoppingCart.clean();
+   await ShoppingCart.clean();
 
     dispatch({ type: ACTIONS.CLEAN });
     return response;
