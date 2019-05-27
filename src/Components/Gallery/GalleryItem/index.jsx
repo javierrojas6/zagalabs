@@ -15,6 +15,7 @@ class GalleryItem extends Component {
   handleAddProduct = event => {
     this.props.addProduct(this.props.item, 1);
   };
+
   render() {
     const { classes, item } = this.props;
 
@@ -48,7 +49,7 @@ GalleryItem.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mS = store => ({});
+const mS = state => ({});
 
 const mD = {
   addProduct

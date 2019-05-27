@@ -12,6 +12,7 @@ export const Product = {
       p.category = `category: ${i}`;
       p.image = 'https://loremflickr.com/160/160/groceries';
       p.price = ((Math.random() + 1) * 30).toFixed(2);
+      p.qty = 1;
 
       producList.push(p);
     }

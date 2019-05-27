@@ -7,7 +7,9 @@ export const ACTIONS = {
 export const getProducts = category => async dispatch => {
   try {
     const response = Product.getProducts(category);
+
     dispatch({ type: ACTIONS.GET_PRODUCTS, payload: response });
+
     return response;
   } catch (error) {
     return error;

@@ -2,56 +2,70 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Grid, GridList, GridListTile, ListSubheader } from "@material-ui/core";
+import { Grid, List, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
-import { getProducts } from "../../Actions/ProductActions";
-import GalleryItem from "./GalleryItem";
-import { Item } from "../../Entity/Item";
+import ShoppingCartItem from "./ShoppingCartItem";
 
 import "./styles.sass";
 import styles from "./theme";
 
 class ShoppingCart extends Component {
   state = {
-    title:'Products - All'
+    products: []
   };
 
-  componentDidMount = () => {
-    this.props.getProducts(null);
-  };
+  componentDidUpdate(prevProps) {
+    if (this.props.products !== prevProps.products) {
+      const products = Object.values(this.props.products);
 
-  render() {
-    const { classes, products } = this.props;
+      if (products.length > 0) {
+        this.setState({
+          products: products,
+          total: parseFloat(this.props.total).toFixed(2)
+        });
+      }
+    }
+  }
+
+  render = () => {
+    const { classes } = this.props;
+    const { products, total } = this.state;
 
     return (
-      <div className={`items-gallery ${classes.root}`}>
+      <div className={`shopping-cart ${classes.root}`}>
         <Grid container spacing={24}>
-          <GridList cellHeight={180} className={classes.gridList}>
-            <GridListTile key="Subheader" cols={3.5} style={{ height: "auto" }}>
-              <ListSubheader component="h2">{this.state.title}</ListSubheader>
-            </GridListTile>
+          <Typography variant="h3" gutterBottom>
+            Cart
+          </Typography>
 
-            {products && products.map(item => <GalleryItem item={item} key={item.id} />)}
-          </GridList>
+          <List dense className={classes.root}>
+            {products &&
+              products.length > 0 &&
+              products.map(item => <ShoppingCartItem item={item} qty={item.qty} key={item.id} />)}
+          </List>
+
+          <Typography variant="body1" gutterBottom>
+            Total: $ {total}
+          </Typography>
         </Grid>
       </div>
     );
-  }
+  };
 }
 
 ShoppingCart.propTypes = {
-  items: PropTypes.arrayOf(Item),
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  products: PropTypes.any,
+  total: PropTypes.number
 };
 
-const mS = store => ({
-  products: store.ProductReducer.products
+const mS = state => ({
+  products: state.ShoppingCartReducer.products,
+  total: state.ShoppingCartReducer.total
 });
 
-const mD = {
-  getProducts
-};
+const mD = {};
 
 export default withStyles(styles)(
   connect(

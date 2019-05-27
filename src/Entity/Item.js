@@ -6,6 +6,7 @@ export class Item {
     this.category = null;
     this.image = null;
     this.price = null;
+    this.qty = null;
     this.isSelected = false;
   }
 }

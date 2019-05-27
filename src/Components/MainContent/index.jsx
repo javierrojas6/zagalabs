@@ -9,13 +9,13 @@ import styles from "./theme";
 
 class MainContent extends Component {
   render() {
-    const { classes, content } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={`main-container ${classes.root}`}>
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <Paper className={classes.paper}>{content}</Paper>
+            <Paper className={classes.paper}>{this.props.children}</Paper>
           </Grid>
         </Grid>
       </div>
@@ -25,7 +25,6 @@ class MainContent extends Component {
 
 MainContent.propTypes = {
   classes: PropTypes.object.isRequired,
-  content: PropTypes.object
 };
 
 export default withStyles(styles)(MainContent);

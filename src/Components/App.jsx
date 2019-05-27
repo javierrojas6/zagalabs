@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -12,6 +13,7 @@ import classNames from "classnames";
 import MainContent from "./MainContent";
 import MainMenu from "./MainMenu";
 import Gallery from "./Gallery";
+import ShoppingCart from "../Components/ShoppingCart";
 
 import "./App.sass";
 import styles from "./App.theme";
@@ -85,7 +87,10 @@ class App extends Component {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <MainContent content={<Gallery />} />
+          <MainContent>
+            <ShoppingCart />
+            <Gallery />
+          </MainContent>
         </main>
       </div>
     );
@@ -97,4 +102,14 @@ App.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(App);
+const mS = state => ({
+});
+
+const mD = {};
+
+export default withStyles(styles, { withTheme: true })(
+  connect(
+    mS,
+    mD
+  )(App)
+);

@@ -14,7 +14,7 @@ import styles from "./theme";
 
 class Gallery extends Component {
   state = {
-    title:'Products - All'
+    title: "Products - All"
   };
 
   componentDidMount = () => {
@@ -45,8 +45,8 @@ Gallery.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mS = store => ({
-  products: store.ProductReducer.products
+const mS = state => ({
+  products: state.ProductReducer.products
 });
 
 const mD = {
