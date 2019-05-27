@@ -27,7 +27,7 @@ class Gallery extends Component {
     return (
       <div className={`items-gallery ${classes.root}`}>
         <Grid container spacing={24}>
-          <GridList cellHeight={180} className={classes.gridList}>
+          <GridList cellHeight={180} spacing={3} className={classes.gridList}>
             <GridListTile key="Subheader" cols={3.5} style={{ height: "auto" }}>
               <ListSubheader component="h2">{this.state.title}</ListSubheader>
             </GridListTile>

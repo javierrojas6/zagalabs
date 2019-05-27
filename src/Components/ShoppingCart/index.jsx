@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Grid, List, Typography } from "@material-ui/core";
+import { Grid, List, Typography, Divider, Button } from "@material-ui/core";
+import { ArrowRight } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 
 import ShoppingCartItem from "./ShoppingCartItem";
@@ -24,6 +25,11 @@ class ShoppingCart extends Component {
           products: products,
           total: parseFloat(this.props.total).toFixed(2)
         });
+      } else {
+        this.setState({
+          products: [],
+          total: 0
+        });
       }
     }
   }
@@ -34,20 +40,33 @@ class ShoppingCart extends Component {
 
     return (
       <div className={`shopping-cart ${classes.root}`}>
-        <Grid container spacing={24}>
-          <Typography variant="h3" gutterBottom>
-            Cart
-          </Typography>
+        <Grid container spacing={0}>
+          <Grid item xs={12}>
+            <Typography variant="h4" gutterBottom>
+              Cart
+            </Typography>
 
-          <List dense className={classes.root}>
-            {products &&
-              products.length > 0 &&
-              products.map(item => <ShoppingCartItem item={item} qty={item.qty} key={item.id} />)}
-          </List>
+            <List dense className={classes.root}>
+              {products &&
+                products.length > 0 &&
+                products.map(item => <ShoppingCartItem item={item} qty={item.qty} key={item.id} />)}
+            </List>
 
-          <Typography variant="body1" gutterBottom>
-            Total: $ {total}
-          </Typography>
+            <Divider />
+
+            {total > 0 ? (
+              <>
+                <Typography variant="body1" gutterBottom>
+                  Total: $ {total}
+                </Typography>
+
+                <Button variant="contained" color="primary">
+                  Checkout
+                  <ArrowRight>Checkout</ArrowRight>
+                </Button>
+              </>
+            ) : null}
+          </Grid>
         </Grid>
       </div>
     );

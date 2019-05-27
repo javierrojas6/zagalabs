@@ -20,7 +20,7 @@ class GalleryItem extends Component {
     const { classes, item } = this.props;
 
     return (
-      <GridListTile>
+      <GridListTile spacing={3} className={classes.galleryItem}>
         <img src={item.image} alt={item.name} />
 
         <GridListTileBar

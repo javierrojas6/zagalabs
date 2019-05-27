@@ -2,8 +2,18 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { ListItem, ListItemAvatar, Avatar, ListItemText, ListItemSecondaryAction, Typography } from "@material-ui/core";
+import {
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  ListItemSecondaryAction,
+  ListItemIcon
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { AddCircleOutline, RemoveCircleOutline } from "@material-ui/icons";
+
+import { addProduct, removeProduct } from "../../../Actions/ShoppingCartActions";
 
 import { Item } from "../../../Entity/Item";
 
@@ -15,18 +25,40 @@ class ShoppingCartItem extends Component {
     subTotal: 0
   };
 
+  componentDidMount() {
+    const {
+      item: { price },
+      qty
+    } = this.props;
+
+    this.setState({
+      subTotal: parseFloat(price * qty).toFixed(2)
+    });
+  }
+
   componentDidUpdate(prevProps) {
-    const { item, qty } = this.props;
+    const {
+      item: { price },
+      qty
+    } = this.props;
 
     if (qty !== prevProps.qty) {
       this.setState({
-        subTotal: parseFloat(item.price * qty).toFixed(2)
+        subTotal: parseFloat(price * qty).toFixed(2)
       });
     }
   }
 
+  handleAddProductClick = () => {
+    this.props.addProduct(this.props.item, 1);
+  };
+  handleRemoveProductClick = () => {
+    this.props.removeProduct(this.props.item);
+  };
+
   render() {
     const { item, qty } = this.props;
+    const { subTotal } = this.state;
 
     return (
       <ListItem key={item.id} button>
@@ -34,13 +66,18 @@ class ShoppingCartItem extends Component {
           <Avatar alt={item.name} src={item.image} />
         </ListItemAvatar>
 
-        <ListItemText primary={item.name} />
-        {qty > 1 ? <ListItemText primary={`x${qty}`} /> : null}
+        <ListItemText className="item-name" primary={item.name} secondary={`x${qty} $ ${item.price}`} />
+
+        <ListItemText className="item-subtotal" primary={`$ ${subTotal}`} />
 
         <ListItemSecondaryAction>
-          <Typography variant="button" gutterBottom>
-            $ {item.price * qty}
-          </Typography>
+          <ListItemIcon onClick={this.handleAddProductClick}>
+            <AddCircleOutline />
+          </ListItemIcon>
+
+          <ListItemIcon onClick={this.handleRemoveProductClick}>
+            <RemoveCircleOutline />
+          </ListItemIcon>
         </ListItemSecondaryAction>
       </ListItem>
     );
@@ -54,7 +91,10 @@ ShoppingCartItem.propTypes = {
 
 const mS = state => ({});
 
-const mD = {};
+const mD = {
+  addProduct,
+  removeProduct
+};
 
 export default withStyles(styles)(
   connect(
