@@ -88,15 +88,7 @@ class App extends Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <MainContent>
-            {/* <SwipeableDrawer
-              anchor="right"
-              open={state.right}
-              onClose={toggleDrawer("right", false)}
-              onOpen={toggleDrawer("right", true)}
-            >
-              {sideList("right")} */}
             <ShoppingCart />
-            {/* </SwipeableDrawer> */}
             <Gallery />
           </MainContent>
         </main>

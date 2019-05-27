@@ -1,4 +1,5 @@
 import { ShoppingCart } from '../API/ShoppingCart';
+import { isNull } from 'util';
 
 export const ACTIONS = {
   ADD_PRODUCT: 'shopping_cart/add_product',
@@ -73,11 +74,13 @@ export const clean = () => async dispatch => {
 
 export const checkout = () => async dispatch => {
   try {
-    const response = await ShoppingCart.checkout();
+    dispatch({ type: ACTIONS.VALIDATE });
+    setTimeout(() => {
+      dispatch({ type: ACTIONS.CHECKOUT });
+    }, 5000);
 
-    dispatch({ type: ACTIONS.CHECKOUT });
 
-    return response;
+    return null;
   } catch (error) {
     return error;
   }

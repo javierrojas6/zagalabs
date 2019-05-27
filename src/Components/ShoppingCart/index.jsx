@@ -34,6 +34,10 @@ class ShoppingCart extends Component {
     }
   }
 
+  handleCheckout = () => {
+    
+  };
+
   render = () => {
     const { classes } = this.props;
     const { products, total } = this.state;
@@ -60,7 +64,7 @@ class ShoppingCart extends Component {
                   Total: $ {total}
                 </Typography>
 
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={this.handleCheckout}>
                   Checkout
                   <ArrowRight>Checkout</ArrowRight>
                 </Button>
